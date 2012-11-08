@@ -1,0 +1,14 @@
+$MP3DIR=/home/hammad/Desktop/tempmusic/*.mp3
+$OUTFILE=/home/hammad/Desktop/links
+
+for MP3 in $MP3DIR
+do
+	SONGNAME=$(tail -c 125 "$MP3" | head -c 30)
+	SONGARTIST=$(tail -c 95 "$MP3" | head -c 30)
+	SONGNAMEPLUS=$(echo $SONGNAME | sed 's/ /\+/g')
+	SONGARTISTPLUS=$(echo $SONGARTIST | sed 's/ /\+/g')
+	SEARCHTERM=$(echo $SONGNAMEPLUS+$SONGARTISTPLUS)
+	#$URL="http://gdata.youtube.com/feeds/api/videos?q\=$SEARCHTERM&max-results\=1"
+	echo -e "setns  a=http://www.w3.org/2005/Atom\ncat a:feed/a:entry/a:link[1]/@href" | xmllint --shell "http://gdata.youtube.com/feeds/api/videos?q=$SEARCHTERM&max-results=1" | grep youtube | cut -d \" -f 2 >> $OUTFILE
+done
+
