@@ -1,5 +1,5 @@
 $MP3DIR=/home/hammad/Desktop/tempmusic/*.mp3
-$OUTFILE=/home/hammad/Desktop/links
+https://www.youtube.com/watch?v=RE6p0UPpNDk=/home/hammad/Desktop/links
 
 for MP3 in $MP3DIR
 do
